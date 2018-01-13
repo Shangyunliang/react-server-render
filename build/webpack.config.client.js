@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HTMLPlugin = require('html-webpack-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -10,7 +11,7 @@ const config = {
   output: {
     filename: '[name].[hash].js',
     path: path.join(__dirname, '../dist'),
-    publicPath: '/public',  // 引用前缀, cdn绝对路径
+    publicPath: '/public/',  // 引用前缀, cdn绝对路径 注意结尾 / 
   },
   module: {
     rules: [
@@ -35,10 +36,20 @@ const config = {
 }
 
 if(isDev) {
+  config.entry = {
+    app: [
+      'react-hot-loader/patch',
+      path.join(__dirname, '../client/app.js')
+    ]
+  }
+
   config.devServer = {
     host: '0.0.0.0',
+    compress: true,
     port: '8888',
     contentBase: path.join(__dirname, '../dist'),
+    // 为了服务编译后的静态文件
+    hot: true,
     overlay: {
       errors: true
     },
@@ -47,6 +58,8 @@ if(isDev) {
       index: '/public/index.html'
     }
   }
+
+  config.plugins.push(new webpack.HotModuleReplacementPlugin())
 }
 
 // 如果配置完仍然不出来. 这时候需要删除打包目录.
