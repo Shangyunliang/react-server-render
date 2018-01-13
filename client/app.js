@@ -8,4 +8,6 @@ import App from './App.jsx'
 // ReactDom.render(App, document.body)
 
 // 如果挂在body上回报一个提醒. 上面由于App 没有写成组件形式
-ReactDom.render(<App />, document.body)
+// hydrate 如果用了服务端渲染. name客户端用这个方法. react对比如果服务端与客户端不一样.
+// 用客户端替换服务端
+ReactDom.hydrate(<App />, document.getElementById('root'))
