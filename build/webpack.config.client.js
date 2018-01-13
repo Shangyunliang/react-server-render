@@ -11,7 +11,7 @@ const config = {
   output: {
     filename: '[name].[hash].js',
     path: path.join(__dirname, '../dist'),
-    publicPath: '/public/',  // 引用前缀, cdn绝对路径 注意结尾 / 
+    publicPath: '/public/',  // 引用前缀, cdn绝对路径 注意结尾 /
   },
   module: {
     rules: [
