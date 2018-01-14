@@ -1,6 +1,6 @@
-import React from 'react'  // 这个引用是必须得否则会报错. 因为这里面用了jsx标签
+import React from 'react'// 这个引用是必须得否则会报错. 因为这里面用了jsx标签
 import ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
+import { AppContainer } from 'react-hot-loader' // eslint-disable-line
 import App from './App.jsx'
 
 // app.295bb5b2e408f9a0fb4a.js:531 Warning: Functions are not valid as a React child.
@@ -15,12 +15,12 @@ import App from './App.jsx'
 
 const root = document.getElementById('root')
 
-const render = Component => {
+const render = (Component) => {
   ReactDOM.hydrate(
     <AppContainer>
-      <Component/>
+      <Component />
     </AppContainer>,
-    root
+    root,
   )
 }
 
@@ -31,9 +31,9 @@ render(App)
 // Warning: Expected server HTML to contain a matching <div> in <div>.
 // TODO 添加全局变量判断环境. 切换调用方法
 
-if(module.hot) {
+if (module.hot) {
   module.hot.accept('./App.jsx', () => {
-    const NextApp = require('./App.jsx').default
+    const NextApp = require('./App.jsx').default // eslint-disable-line
     render(NextApp, root)
   })
 }
