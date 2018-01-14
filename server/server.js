@@ -10,7 +10,7 @@ const app = express()
 
 app.use(favicon(path.join(__dirname, '../favicon.ico')))
 
-if(!isDev) {
+if (!isDev) {
   const serverEntry = require('../dist/server-entry').default
   const template = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf8')
   app.use('/public', express.static(path.join(__dirname, '../dist')))
@@ -20,7 +20,7 @@ if(!isDev) {
     console.log(renderString)
     res.send(renderString)
   })
-}else {
+} else {
   const devStatic = require('./Until/dev-static')
   devStatic(app)
 }

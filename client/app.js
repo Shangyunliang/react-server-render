@@ -1,7 +1,11 @@
 import React from 'react'// 这个引用是必须得否则会报错. 因为这里面用了jsx标签
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'mobx-react'
 import { AppContainer } from 'react-hot-loader' // eslint-disable-line
-import App from './App.jsx'
+import App from './views/App'
+
+import appState from './store/app-state'
 
 // app.295bb5b2e408f9a0fb4a.js:531 Warning: Functions are not valid as a React child.
 // This may happen if you return a Component instead of <Component /> from render.
@@ -18,7 +22,11 @@ const root = document.getElementById('root')
 const render = (Component) => {
   ReactDOM.hydrate(
     <AppContainer>
-      <Component />
+      <Provider appState={appState}>
+        <BrowserRouter>
+          <Component />
+        </BrowserRouter>
+      </Provider>
     </AppContainer>,
     root,
   )
@@ -32,8 +40,8 @@ render(App)
 // TODO 添加全局变量判断环境. 切换调用方法
 
 if (module.hot) {
-  module.hot.accept('./App.jsx', () => {
-    const NextApp = require('./App.jsx').default // eslint-disable-line
+  module.hot.accept('./views/App', () => {
+    const NextApp = require('./views/App').default // eslint-disable-line
     render(NextApp, root)
   })
 }
