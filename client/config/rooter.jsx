@@ -29,3 +29,12 @@ export default () => [
   <Route path="/list" component={TopicList} key="list" />,
   <Route path="/detail" component={TopicDetail} key="detail" />,
 ]
+
+// 如果前端访问 / 那么其实只返回如下内容， 重定向后返回TopicList
+// <div key="banner">
+//   <Link to="/">首页</Link>
+//   <br />
+//   <Link to="/detail">详情页</Link>
+//  </div>
+// 那么优化点来了： 能不能重定向在服务端渲染时就已经解决。 不要等待到客户端后再发起。
+// 直接返回渲染好的重定向地址内容

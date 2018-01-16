@@ -5,7 +5,7 @@ import { Provider } from 'mobx-react'
 import { AppContainer } from 'react-hot-loader' // eslint-disable-line
 import App from './views/App'
 
-import appState from './store/app-state'
+import AppState from './store/app-state'
 
 // app.295bb5b2e408f9a0fb4a.js:531 Warning: Functions are not valid as a React child.
 // This may happen if you return a Component instead of <Component /> from render.
@@ -17,12 +17,14 @@ import appState from './store/app-state'
 // 用客户端替换服务端
 // ReactDom.hydrate(<App />, document.getElementById('root'))
 
+const initialState = window.__INITIAL__STATE__ || {} // eslint-disable-line
+
 const root = document.getElementById('root')
 
 const render = (Component) => {
   ReactDOM.hydrate(
     <AppContainer>
-      <Provider appState={appState}>
+      <Provider appState={new AppState(initialState.appState)}>
         <BrowserRouter>
           <Component />
         </BrowserRouter>

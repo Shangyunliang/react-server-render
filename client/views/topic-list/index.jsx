@@ -13,6 +13,15 @@ export default class TopicList extends Component {
     // do something
   }
 
+  asyncBootstrap() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        this.props.appState.count = 3
+        resolve(true) // 一定要是 true 或者 false asyncBootstrap 才能判断是否执行成功
+      })
+    })
+  }
+
   changeName = (event) => {
     this.props.appState.changeName(event.target.value)
   }
