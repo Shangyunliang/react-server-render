@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Helmet from 'react-helmet'
 
 export default class TopicDetail extends Component {
   componentDidMount() {
@@ -7,7 +8,13 @@ export default class TopicDetail extends Component {
 
   render() {
     return (
-      <div>This is topic detail</div>
+      <div>
+        <Helmet>
+          <title>detail</title>
+          <meta name="description" content="This is description" />
+        </Helmet>
+        <span>This is topic detail</span>
+      </div>
     )
   }
 }

@@ -16,6 +16,7 @@ import { createStoreMap } from './store/store'
 useStaticRendering(true)
 
 // stores ==> {appStore: xxx}
+//
 export default (stores, routerContext, url) => (
   <Provider {...stores}>
     <StaticRouter context={routerContext} location={url}>
